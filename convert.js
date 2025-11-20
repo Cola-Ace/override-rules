@@ -198,6 +198,14 @@ const ruleProviders = {
         "url": "https://cdn.jsdelivr.net/gh/powerfullz/override-rules@master/ruleset/EHentai.list",
         "path": "./ruleset/EHentai.list"
     },
+    "Pixiv": {
+        "type": "http",
+        "behavior": "classical",
+        "format": "text",
+        "interval": 86400,
+        "url": "https://cdn.jsdelivr.net/gh/Cola-Ace/override-rules@master/ruleset/Pixiv.list",
+        "path": "./ruleset/EHentai.list"
+    },
     "SteamFix": {
         "type": "http",
         "behavior": "classical",
@@ -250,6 +258,7 @@ const baseRules = [
     `RULE-SET,AdditionalCDNResources,静态资源`,
     `RULE-SET,Crypto,Crypto`,
     `RULE-SET,EHentai,E-Hentai`,
+    `RULE-SET,Pixiv,Pixiv`,
     `RULE-SET,TikTok,TikTok`,
     `RULE-SET,SteamFix,${PROXY_GROUPS.DIRECT}`,
     `RULE-SET,GoogleFCM,${PROXY_GROUPS.DIRECT}`,
@@ -621,6 +630,12 @@ function buildProxyGroups({
         {
             "name": "E-Hentai",
             "icon": "https://cdn.jsdelivr.net/gh/powerfullz/override-rules@master/icons/Ehentai.png",
+            "type": "select",
+            "proxies": defaultProxies
+        },
+        {
+            "name": "Pixiv",
+            "icon": "https://cdn.jsdelivr.net/gh/Cola-Ace/override-rules@master/icons/Pixiv.png",
             "type": "select",
             "proxies": defaultProxies
         },
