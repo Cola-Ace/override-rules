@@ -375,11 +375,15 @@ const geoxURL = {
 
 // 地区元数据
 const countriesMeta = {
+    // "香港": {
+    //     pattern: "(?i)香港|港|HK|hk|Hong Kong|HongKong|hongkong|🇭🇰",
+    //     icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Hong_Kong.png"
+    // },
+    // "香港 IEPL": {
+    //     pattern: "(?i)(?=.*香港|港|HK|hk|Hong Kong|HongKong|hongkong|🇭🇰)(?=.*iepl|IEPL)",
+    //     icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Hong_Kong.png"
+    // },
     "香港": {
-        pattern: "(?i)香港|港|HK|hk|Hong Kong|HongKong|hongkong|🇭🇰",
-        icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Hong_Kong.png"
-    },
-    "香港 IEPL": {
         pattern: "(?i)(?=.*香港|港|HK|hk|Hong Kong|HongKong|hongkong|🇭🇰)(?=.*iepl|IEPL)",
         icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Hong_Kong.png"
     },
@@ -399,10 +403,10 @@ const countriesMeta = {
         pattern: "(?i)日本|川日|东京|大阪|泉日|埼玉|沪日|深日|JP|Japan|🇯🇵",
         icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Japan.png"
     },
-    "日本 IEPL": {
-        pattern: "(?i)(?=.*日本|川日|东京|大阪|泉日|埼玉|沪日|深日|JP|Japan|🇯🇵)(?=.*ipel|IEPL)",
-        icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Japan.png"
-    },
+    // "日本 IEPL": {
+    //     pattern: "(?i)(?=.*日本|川日|东京|大阪|泉日|埼玉|沪日|深日|JP|Japan|🇯🇵)(?=.*ipel|IEPL)",
+    //     icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Japan.png"
+    // },
     "韩国": {
         pattern: "(?i)KR|Korea|KOR|首尔|韩|韓|🇰🇷",
         icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Korea.png"
