@@ -369,6 +369,10 @@ const countriesMeta = {
         pattern: "(?i)香港|港|HK|hk|Hong Kong|HongKong|hongkong|🇭🇰",
         icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Hong_Kong.png"
     },
+    "香港 IEPL": {
+        pattern: "(?i)(?=.*香港|港|HK|hk|Hong Kong|HongKong|hongkong|🇭🇰)(?=.*iepl)",
+        icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Hong_Kong.png"
+    },
     "澳门": {
         pattern: "(?i)澳门|MO|Macau|🇲🇴",
         icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Macao.png"
@@ -383,6 +387,10 @@ const countriesMeta = {
     },
     "日本": {
         pattern: "(?i)日本|川日|东京|大阪|泉日|埼玉|沪日|深日|JP|Japan|🇯🇵",
+        icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Japan.png"
+    },
+    "日本": {
+        pattern: "(?i)(?=.*日本|川日|东京|大阪|泉日|埼玉|沪日|深日|JP|Japan|🇯🇵)(?=.*iepl)",
         icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Japan.png"
     },
     "韩国": {
@@ -499,7 +507,7 @@ function buildCountryProxyGroups({ countries, landing, loadBalance }) {
 
         if (!loadBalance) {
             Object.assign(groupConfig, {
-                "url": "https://cp.cloudflare.com/generate_204",
+                "url": "http://www.gstatic.com/generate_204",
                 "interval": 60,
                 "tolerance": 20,
                 "lazy": false
