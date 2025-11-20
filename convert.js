@@ -367,7 +367,7 @@ const geoxURL = {
 // 地区元数据
 const countriesMeta = {
     "香港": {
-        pattern: "(?i)香港|港|HK|hk|Hong Kong|HongKong|hongkong|🇭🇰|iepl",
+        pattern: "(?i)香港|港|HK|hk|Hong Kong|HongKong|hongkong|🇭🇰",
         icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Hong_Kong.png"
     },
     "澳门": {
@@ -383,7 +383,7 @@ const countriesMeta = {
         icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Singapore.png"
     },
     "日本": {
-        pattern: "(?i)日本|川日|东京|大阪|泉日|埼玉|沪日|深日|JP|Japan|🇯🇵|iepl",
+        pattern: "(?i)日本|川日|东京|大阪|泉日|埼玉|沪日|深日|JP|Japan|🇯🇵",
         icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Japan.png"
     },
     "韩国": {
