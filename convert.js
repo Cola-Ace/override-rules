@@ -204,7 +204,7 @@ const ruleProviders = {
         "format": "text",
         "interval": 86400,
         "url": "https://cdn.jsdelivr.net/gh/Cola-Ace/override-rules@master/ruleset/Pixiv.list",
-        "path": "./ruleset/EHentai.list"
+        "path": "./ruleset/Pixiv.list"
     },
     "SteamFix": {
         "type": "http",
