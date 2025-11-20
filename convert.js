@@ -14,6 +14,7 @@ https://github.com/powerfullz/override-rules
 */
 
 const NODE_SUFFIX = "节点";
+const PING_URL = "http://www.gstatic.com/generate_204";
 
 function parseBool(value) {
     if (typeof value === "boolean") return value;
@@ -370,7 +371,7 @@ const countriesMeta = {
         icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Hong_Kong.png"
     },
     "香港 IEPL": {
-        pattern: "(?i)(?=.*香港|港|HK|hk|Hong Kong|HongKong|hongkong|🇭🇰)(?=.*iepl)",
+        pattern: "(?i)(?=.*香港|港|HK|hk|Hong Kong|HongKong|hongkong|🇭🇰)(?=.*iepl|IEPL)",
         icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Hong_Kong.png"
     },
     "澳门": {
@@ -390,7 +391,7 @@ const countriesMeta = {
         icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Japan.png"
     },
     "日本": {
-        pattern: "(?i)(?=.*日本|川日|东京|大阪|泉日|埼玉|沪日|深日|JP|Japan|🇯🇵)(?=.*iepl)",
+        pattern: "(?i)(?=.*日本|川日|东京|大阪|泉日|埼玉|沪日|深日|JP|Japan|🇯🇵)(?=.*iepl|IEPL)",
         icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Japan.png"
     },
     "韩国": {
@@ -507,7 +508,7 @@ function buildCountryProxyGroups({ countries, landing, loadBalance }) {
 
         if (!loadBalance) {
             Object.assign(groupConfig, {
-                "url": "http://www.gstatic.com/generate_204",
+                "url": PING_URL,
                 "interval": 60,
                 "tolerance": 20,
                 "lazy": false
@@ -571,7 +572,7 @@ function buildProxyGroups({
             "name": PROXY_GROUPS.FALLBACK,
             "icon": "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Bypass.png",
             "type": "fallback",
-            "url": "https://cp.cloudflare.com/generate_204",
+            "url": PING_URL,
             "proxies": defaultFallback,
             "interval": 180,
             "tolerance": 20,
@@ -689,7 +690,7 @@ function buildProxyGroups({
             "name": PROXY_GROUPS.LOW_COST,
             "icon": "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Lab.png",
             "type": "url-test",
-            "url": "https://cp.cloudflare.com/generate_204",
+            "url": PING_URL,
             "include-all": true,
             "filter": "(?i)0\.[0-5]|低倍率|省流|大流量|实验性"
         } : null,
