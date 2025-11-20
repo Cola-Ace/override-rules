@@ -462,13 +462,13 @@ function parseCountries(config) {
     const countryCounts = Object.create(null);
 
     // 构建地区正则表达式，去掉 (?i) 前缀
-    const compiledRegex = {};
-    for (const [country, meta] of Object.entries(countriesMeta)) {
-        compiledRegex[country] = new RegExp(
-            meta.pattern.replace(/^\(\?i\)/, ''),
-            'i'
-        );
-    }
+    // 保持按 key 名长度降序以把更具体的 key（如 "香港 IEPL"）优先考虑（可选）
+    const compiledList = Object.entries(countriesMeta)
+        .map(([country, meta]) => {
+            const pattern = meta.pattern.replace(/^\(\?i\)/, '');
+            return [country, new RegExp(pattern, 'i')];
+        })
+        .sort((a, b) => b[0].length - a[0].length); // 按 country 名长度降序，较长的优先
 
     // 逐个节点进行匹配与统计
     for (const proxy of proxies) {
@@ -477,11 +477,11 @@ function parseCountries(config) {
         // 过滤掉不想统计的 ISP 节点
         if (ispRegex.test(name)) continue;
 
-        // 找到第一个匹配到的地区就计数并终止本轮
-        for (const [country, regex] of Object.entries(compiledRegex)) {
+        // 找到匹配的所有地区并分别计数（允许一个节点同时属于多个地区组）
+        for (const [country, regex] of compiledList) {
             if (regex.test(name)) {
                 countryCounts[country] = (countryCounts[country] || 0) + 1;
-                break;    // 避免一个节点同时累计到多个地区
+                // 注意：不再 break，这样节点可以同时增加到多个 countryCounts 中
             }
         }
     }
@@ -492,7 +492,7 @@ function parseCountries(config) {
         result.push({ country, count });
     }
 
-    return result;   // [{ country: 'Japan', count: 12 }, ...]
+    return result;   // [{ country: '香港 IEPL', count: 2 }, { country: '香港', count: 5 }, ...]
 }
 
 
