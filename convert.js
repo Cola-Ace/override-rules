@@ -400,7 +400,7 @@ const countriesMeta = {
         icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Japan.png"
     },
     "日本 IEPL": {
-        pattern: "(?i)(?=.*日本|川日|东京|大阪|泉日|埼玉|沪日|深日|JP|Japan|🇯🇵)(?=.*ipel|IEPL)",
+        pattern: "(?i)(?=.*日本|川日|东京|大阪|泉日|埼玉|沪日|深日|JP|Japan|🇯🇵)(?=.*iepl|IEPL)",
         icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Japan.png"
     },
     "韩国": {
@@ -468,7 +468,16 @@ function parseCountries(config) {
             const pattern = meta.pattern.replace(/^\(\?i\)/, '');
             return [country, new RegExp(pattern, 'i')];
         })
-        .sort((a, b) => b[0].length - a[0].length); // 按 country 名长度降序，较长的优先
+        .sort((a, b) => b[0].length - a[0].length);
+
+    // 预构建 IEPL->base 映射，例如 "香港 IEPL" -> "香港"
+    const ieplToBase = {};
+    for (const country of Object.keys(countriesMeta)) {
+        const m = country.match(/\s*IEPL$/i);
+        if (m) {
+            ieplToBase[country] = country.replace(/\s*IEPL$/i, "").trim();
+        }
+    }
 
     // 逐个节点进行匹配与统计
     for (const proxy of proxies) {
@@ -477,12 +486,35 @@ function parseCountries(config) {
         // 过滤掉不想统计的 ISP 节点
         if (ispRegex.test(name)) continue;
 
-        // 找到匹配的所有地区并分别计数（允许一个节点同时属于多个地区组）
+        // 找到匹配到的所有地区（允许一个节点匹配多个地区）
+        const matched = [];
         for (const [country, regex] of compiledList) {
             if (regex.test(name)) {
-                countryCounts[country] = (countryCounts[country] || 0) + 1;
-                // 注意：不再 break，这样节点可以同时增加到多个 countryCounts 中
+                matched.push(country);
             }
+        }
+
+        if (matched.length === 0) continue;
+
+        // 记录哪些 base 国家有对应的 IEPL 被匹配到（如 "香港 IEPL" -> base "香港"）
+        const matchedIEPLBases = new Set();
+        for (const c of matched) {
+            if (/\bIEPL\b/i.test(c) && ieplToBase[c]) {
+                matchedIEPLBases.add(ieplToBase[c]);
+            }
+        }
+
+        // 对匹配到的地区计数：如果某 base 国家同时被 IEPL 匹配，则跳过 base 的计数，仅计 IEPL 专用项
+        for (const c of matched) {
+            // 如果当前是 base（非 IEPL），但其 base 名在 matchedIEPLBases 中，则跳过
+            const isIEPL = /\bIEPL\b/i.test(c);
+            if (!isIEPL) {
+                // c 可能本身就是 base 名，也可能是其它具体名（如果你有其它专用名，按需扩展）
+                if (matchedIEPLBases.has(c)) {
+                    continue; // 有 IEPL 专用项命中，跳过通用计数
+                }
+            }
+            countryCounts[c] = (countryCounts[c] || 0) + 1;
         }
     }
 
@@ -492,7 +524,7 @@ function parseCountries(config) {
         result.push({ country, count });
     }
 
-    return result;   // [{ country: '香港 IEPL', count: 2 }, { country: '香港', count: 5 }, ...]
+    return result;   // 例如 [{ country: '香港 IEPL', count: 2 }, { country: '香港', count: 5 }, ...]
 }
 
 
