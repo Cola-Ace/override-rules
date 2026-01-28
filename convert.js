@@ -321,8 +321,8 @@ function buildDnsConfig({ mode, fakeIpFilter }) {
         "prefer-h3": true,
         "enhanced-mode": mode,
         "default-nameserver": [
-            "119.29.29.29",
-            "223.5.5.5"
+            "https://doh.pub/dns-query",
+            "https://223.5.5.5/dns-query"
         ],
         "nameserver": [
             "system",
