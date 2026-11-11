@@ -91,6 +91,10 @@ function buildRegionGroups(ctx: GroupBuildContext): Array<ProxyGroup | null> {
     const { flags, nodes } = ctx;
     const hasLowCost = nodes.lowCostNodes.length > 0 || flags.regexFilter;
     const tailscaleExcludeFilter = buildNodeExcludeFilter(nodes.tailscaleNodes);
+    const countryNodeExcludeFilter = buildNodeExcludeFilter([
+        ...nodes.landingNodes,
+        ...nodes.tailscaleNodes,
+    ]);
 
     const lowCostGroup = hasLowCost
         ? buildGroupByType({
@@ -112,7 +116,7 @@ function buildRegionGroups(ctx: GroupBuildContext): Array<ProxyGroup | null> {
     const countryGroups = nodes.regionLayout.groupedCountries.map((country) => {
         const meta = countriesMeta[country];
 
-        const excludeFilter = combineExcludeFilters(meta.excludePattern, tailscaleExcludeFilter);
+        const excludeFilter = combineExcludeFilters(meta.excludePattern, countryNodeExcludeFilter);
         const nodeSource = flags.regexFilter
             ? {
                   "include-all": true as const,

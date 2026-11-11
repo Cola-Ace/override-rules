@@ -36,6 +36,8 @@ export function buildRules({
         adblockSource > 0 ? ruleSet("ADBlock", PROXY_GROUPS.AD_BLOCK) : null,
         adblockSource > 0 ? ruleSet("AdditionalFilter", PROXY_GROUPS.AD_BLOCK) : null,
         ruleSet("SogouInput", PROXY_GROUPS.SOGOU_INPUT),
+        `DOMAIN-SUFFIX,pixiv.net,${PROXY_GROUPS.PIXIV}`,
+        `DOMAIN-SUFFIX,pximg.net,${PROXY_GROUPS.PIXIV}`,
         `DOMAIN-SUFFIX,truthsocial.com,${PROXY_GROUPS.TRUTH_SOCIAL}`,
         ruleSet("StaticResources", PROXY_GROUPS.STATIC_RESOURCES),
         ruleSet("CDNResources", PROXY_GROUPS.STATIC_RESOURCES),

@@ -1,3 +1,9 @@
+## IEPL / Pixiv 定制覆写规则
+
+基于 powerfullz/override-rules v2.10.1，新增香港／日本 IEPL 独立分组和 Pixiv 独立分流。普通地区组与对应 IEPL 组互斥，JS 和静态 YAML 使用相同筛选规则。
+
+使用本地生成的 `convert.min.js` 导入覆写；定制行为、构建命令和远程部署地址见 [定制使用说明](CUSTOMISATIONS.md)。下方保留上游说明，其中 powerfullz 仓库的脚本链接提供上游版本。
+
 ## powerfullz 的 Mihomo/Substore 覆写规则
 
 ![](img/cover.png)

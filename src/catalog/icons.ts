@@ -45,6 +45,7 @@ export const ICONS = {
     weibo: `${QURE}/Weibo.png`,
     truthSocial: `${SELF}/Truth_Social.png`,
     ehentai: `${SELF}/Ehentai.png`,
+    pixiv: `${CDN_URL}/gh/Cola-Ace/override-rules@5650ea6b28e7e935de7e140ab81942a76c7e162d/icons/Pixiv.png`,
     pikpak: `${SELF}/PikPak.png`,
     sogouInput: `${SELF}/Sougou.png`,
     tailscale: `${SELF}/Tailscale.png`,

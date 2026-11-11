@@ -13,6 +13,11 @@ import { CDN_URL } from "./endpoints";
 import type { CountryMeta } from "../types/proxy";
 
 const QURE = `${CDN_URL}/gh/Koolson/Qure@master/IconSet/Color`;
+const HONG_KONG_PATTERN =
+    "香港|港|\\b(?:HK|hk)(?:[-_ ]?\\d+(?:[-_ ]?[A-Za-z]{2,})?)?\\b|Hong Kong|HongKong|hongkong|HONG KONG|HONGKONG|深港|HKG|九龙|Kowloon|新界|沙田|荃湾|葵涌|🇭🇰";
+const JAPAN_PATTERN =
+    "日本|川日|东京|大阪|泉日|埼玉|沪日|深日|\\b(?:JP|jp)(?:[-_ ]?\\d+(?:[-_ ]?[A-Za-z]{2,})?)?\\b|Japan|JAPAN|JPN|NRT|HND|KIX|TYO|OSA|关西|Kansai|KANSAI|🇯🇵";
+const IEPL_PATTERN = "[Ii][Ee][Pp][Ll]";
 
 /**
  * 供其他模块（如服务代理组）引用的地区键。
@@ -22,6 +27,7 @@ const QURE = `${CDN_URL}/gh/Koolson/Qure@master/IconSet/Color`;
  */
 export const COUNTRY_KEYS = {
     hongKong: "香港",
+    hongKongIepl: "香港 IEPL",
     taiwan: "台湾",
     unitedStates: "美国",
 } as const;
@@ -31,11 +37,16 @@ export const COUNTRY_KEYS = {
  * `pattern` 是用于匹配节点名称的正则字符串；`icon` 为策略组图标 URL。
  */
 export const countriesMeta: Record<string, CountryMeta> = {
+    [COUNTRY_KEYS.hongKongIepl]: {
+        weight: 9,
+        pattern: `(?:${HONG_KONG_PATTERN}).*${IEPL_PATTERN}|${IEPL_PATTERN}.*(?:${HONG_KONG_PATTERN})`,
+        icon: `${QURE}/Hong_Kong.png`,
+    },
     [COUNTRY_KEYS.hongKong]: {
         weight: 10,
-        pattern:
-            "香港|港|\\b(?:HK|hk)(?:[-_ ]?\\d+(?:[-_ ]?[A-Za-z]{2,})?)?\\b|Hong Kong|HongKong|hongkong|HONG KONG|HONGKONG|深港|HKG|九龙|Kowloon|新界|沙田|荃湾|葵涌|🇭🇰",
+        pattern: HONG_KONG_PATTERN,
         icon: `${QURE}/Hong_Kong.png`,
+        excludePattern: IEPL_PATTERN,
     },
     澳门: {
         pattern: "澳门|\\b(?:MO|mo)(?:[-_ ]?\\d+(?:[-_ ]?[A-Za-z]{2,})?)?\\b|Macau|🇲🇴",
@@ -53,11 +64,16 @@ export const countriesMeta: Record<string, CountryMeta> = {
             "新加坡|坡|狮城|\\b(?:SG|sg)(?:[-_ ]?\\d+(?:[-_ ]?[A-Za-z]{2,})?)?\\b|Singapore|SINGAPORE|SIN|🇸🇬",
         icon: `${QURE}/Singapore.png`,
     },
+    "日本 IEPL": {
+        weight: 39,
+        pattern: `(?:${JAPAN_PATTERN}).*${IEPL_PATTERN}|${IEPL_PATTERN}.*(?:${JAPAN_PATTERN})`,
+        icon: `${QURE}/Japan.png`,
+    },
     日本: {
         weight: 40,
-        pattern:
-            "日本|川日|东京|大阪|泉日|埼玉|沪日|深日|\\b(?:JP|jp)(?:[-_ ]?\\d+(?:[-_ ]?[A-Za-z]{2,})?)?\\b|Japan|JAPAN|JPN|NRT|HND|KIX|TYO|OSA|关西|Kansai|KANSAI|🇯🇵",
+        pattern: JAPAN_PATTERN,
         icon: `${QURE}/Japan.png`,
+        excludePattern: IEPL_PATTERN,
     },
     韩国: {
         weight: 45,

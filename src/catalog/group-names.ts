@@ -31,6 +31,7 @@ export const PROXY_GROUPS = {
     TIKTOK: "TikTok",
     SPOTIFY: "Spotify",
     EHENTAI: "E-Hentai",
+    PIXIV: "Pixiv",
     TELEGRAM: "Telegram",
     TRUTH_SOCIAL: "Truth Social",
     TWITTER: "Twitter",
