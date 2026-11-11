@@ -1,0 +1,9 @@
+{
+  "version": "2.10.1-iepl-pixiv",
+  "upstreamCommit": "a6dfd9063ff36588f600891046169951020124ae",
+  "sourceRepository": "https://github.com/Cola-Ace/override-rules",
+  "sourceBranch": "feat/iepl-pixiv",
+  "sourceCommit": "5a5aef4a6fd1a36e22f9a54f7d3c02cbe5e71c8c",
+  "publishedAt": "2026-11-11T11:19:13.9211656Z",
+  "yamlCount": 768
+}
